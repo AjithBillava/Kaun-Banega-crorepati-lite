@@ -1,43 +1,49 @@
 var readlineSync=require("readline-sync");
+var chalk=require('chalk');
 
-console.log("------KAUN BANEGA CROREPATI lite-------");
+console.clear();
+console.log(chalk.bgMagenta("------KAUN BANEGA CROREPATI lite-------"));
 
-var name=readlineSync.question("\nSo, What's your name: ");
+var name=readlineSync.question(chalk.yellowBright("\nSo, What's your name: "));
 var score=0;
+var count=0;
 
-console.log("\nWelcome to the game, ",name,"\nLet's begin...")
+console.log(chalk.yellow("\nWelcome to the game,",name,"\nLet's begin with..."));
+console.log(chalk.black.bgYellowBright.bold("\nLEVEL 1"))
 
 
 //function to add questions
 function play(question,options,answer){
-  console.log(question);
+  console.log(chalk.cyanBright(question));
 
-  var userAns=readlineSync.keyInSelect(options,"\nSelect your options to lock: ");
+  var userAns=readlineSync.keyInSelect(options,"Select your options to lock: ");
 
   if(options[userAns]===answer){
-      console.log("\nSahi jawab....");
+      console.log(chalk.green("\nSahi jawab...."));
       score+=1;
-    console.log("score: ",score)
+    console.log(chalk.black.bgYellowBright.bold("AAPKA SCORE HOTA HAI:"),chalk.yellowBright.bold(score))
 
       if(score>=4 && score<6){
-        console.log("\nWelcome to LEVEL 2...")
+        console.log(chalk.black.bgYellowBright.bold("\nWelcome to LEVEL 2..."))
       }
       else if(score>=6 && score<8){
-        console.log("\nWelcome to LEVEL 3...")
+        console.log(chalk.black.bgYellowBright.bold("\nWelcome to LEVEL 3..."))
       }
       
       // else if(score>8 && score<10){
       //   console.log("\nWelcome to LEVEL 4...")
       // }
       else if(score===10){
-        console.log("\nYou have won the game...")        
+        console.log(chalk.black.bgYellowBright.bold("\nYou have won the game...") )       
       }
   }
   else{
-    console.log("\nAfsos,Galat jawab");
-    console.log("score: ",score)
+    console.log(chalk.red("\nAfsos,Galat jawab"));
+    console.log(chalk.black.bgYellowBright.bold("AAPKA SCORE HOTA HAI:"),chalk.yellowBright.bold(score))
 
   }
+  count+=1;
+  
 
 }
 
@@ -74,6 +80,9 @@ play("\nWho is conducting the free BOOT DEVELOPMENT camp?: ",optionSet9,"NeoGCam
 play("\nWhich is the highest grossing movie of India?: ",optionSet10,"Baahubali 2");
 
 
-
+if(count<10){
+        console.log(chalk.black.bgYellowBright.bold("\nBetter luck next time...") )       
+    
+  }
 
 
